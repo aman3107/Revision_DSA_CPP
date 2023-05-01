@@ -14,7 +14,7 @@ int main(){
     if(grade == 'A'){
         allow = 1700;
     }
-    else if(grade = 'B'){
+    else if(grade == 'B'){
         allow = 1500;
     }
     else{
