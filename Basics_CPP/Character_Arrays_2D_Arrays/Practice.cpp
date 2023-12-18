@@ -77,6 +77,70 @@ int findLargest(int input[][1001], int row, int col)
     return maxSum;
 }
 
+void transpose(int row, int col, int input[][1001])
+{
+    for (int j = 0; j < col; j++)
+    {
+        for (int i = 0; i < row; i++)
+        {
+            cout << input[i][j] << " ";
+        }
+        cout << endl;
+    }
+}
+
+int totalSum(int input[][1001], int n)
+{
+    // Write your code here
+    int srow = 0;
+    int scol = 0;
+    int ecol = n - 1;
+    int erow = n - 1;
+    int sum = 0;
+    for (int i = scol; i <= ecol; i++)
+    {
+        sum = sum + input[srow][i];
+    }
+    cout << sum;
+    srow++;
+    for (int i = srow; i <= erow; i++)
+    {
+        sum = sum + input[i][ecol];
+    }
+    cout << sum;
+    ecol--;
+    for (int i = ecol; i >= scol; i--)
+    {
+        sum = sum + input[erow][i];
+    }
+    cout << sum;
+    erow--;
+    for (int i = erow; i >= srow; i--)
+    {
+        sum = sum + input[i][scol];
+    }
+    cout << sum;
+    for (int i = 1; i < n - 1; i++)
+    {
+        sum = sum + input[i][i];
+    }
+    cout << sum;
+    int j = n - 2;
+    for (int i = 1; i < n - 1; i++)
+    {
+        if (i != j)
+        {
+            sum = sum + input[i][j];
+            j--;
+        }
+        else
+        {
+            j--;
+        }
+    }
+    return sum;
+}
+
 int main()
 {
     // char str[100];
@@ -115,6 +179,19 @@ int main()
     //     cout << output[i] << " ";
     // }
 
+    // int row, col;
+    // cin >> row >> col;
+    // int arr[row][1001];
+    // for (int i = 0; i < row; i++)
+    // {
+    //     for (int j = 0; j < col; j++)
+    //     {
+    //         cin >> arr[i][j];
+    //     }
+    // }
+
+    // cout << findLargest(arr, row, col);
+
     int row, col;
     cin >> row >> col;
     int arr[row][1001];
@@ -125,6 +202,6 @@ int main()
             cin >> arr[i][j];
         }
     }
-
-    cout << findLargest(arr, row, col);
+    // transpose(row, col, arr);
+    cout << totalSum(arr, row);
 }
