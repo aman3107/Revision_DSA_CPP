@@ -214,27 +214,112 @@ void merge2SortedArrays(int arr1[], int n, int arr2[], int m, int arr3[])
   }
 }
 
-int main()
+int squareRoot(int n)
 {
-  int n, m;
-  cout << "Enter value of n and m :" << endl;
-  cin >> n >> m;
-  int arr1[n];
-  int arr2[m];
-  cout << "Enter elements in 1st array :" << endl;
+  int squareNumber = 0;
+  while (squareNumber * squareNumber <= n)
+  {
+    squareNumber++;
+  }
+  return squareNumber - 1;
+}
+
+void Sort_0_1_2(int arr[], int n)
+{
+  int i = 0;
+  int j = 0;
+  int k = n - 1;
+  while (j <= k)
+  {
+    if (arr[j] == 0)
+    {
+      int temp = arr[i];
+      arr[i] = arr[j];
+      arr[j] = temp;
+      i++;
+      j++;
+    }
+    else if (arr[j] == 2)
+    {
+      int temp = arr[k];
+      arr[k] = arr[j];
+      arr[j] = temp;
+      k--;
+    }
+    else
+    {
+      j++;
+    }
+  }
+}
+
+int findSecondLargets(int arr[], int n)
+{
+  int max = INT_MIN;
+  int sec_max = INT_MIN;
   for (int i = 0; i < n; i++)
   {
-    cin >> arr1[i];
+    if (arr[i] > max)
+    {
+      sec_max = max;
+      max = arr[i];
+    }
+    else if (arr[i] > sec_max && max > sec_max)
+    {
+      sec_max = arr[i];
+    }
   }
-  cout << "Enter elements in 2nd array : " << endl;
-  for (int i = 0; i < m; i++)
+  return sec_max;
+}
+
+int missingNumber(int arr[], int n)
+{
+  int sum = 0;
+  for (int i = 1; i <= n; i++)
   {
-    cin >> arr2[i];
+    sum = sum + i;
   }
-  int arr3[n + m];
+  for (int i = 0; i < n; i++)
+  {
+    sum = sum - arr[i];
+  }
+  return sum;
+}
+
+int main()
+{
+  int n;
+  cout << "Enter value of n : " << endl;
+  cin >> n;
+  int arr[n];
+  for (int i = 0; i < n; i++)
+  {
+    cin >> arr[i];
+  }
+  cout << missingNumber(arr, n);
+  // cout << findSecondLargets(arr, n);
+  // Sort_0_1_2(arr, n);
+  // printArray(arr, n);
+  // cout << squareRoot(n) << endl;
+  // int n, m;
+  // cout << "Enter value of n and m :" << endl;
+  // cin >> n >> m;
+  // int arr1[n];
+  // int arr2[m];
+  // cout << "Enter elements in 1st array :" << endl;
+  // for (int i = 0; i < n; i++)
+  // {
+  //   cin >> arr1[i];
+  // }
+  // cout << "Enter elements in 2nd array : " << endl;
+  // for (int i = 0; i < m; i++)
+  // {
+  //   cin >> arr2[i];
+  // }
+  // int arr3[n + m];
   // insertionSort(arr, n);
-  merge2SortedArrays(arr1, n, arr2, m, arr3);
-  printArray(arr3, n + m);
+  // merge2SortedArrays(arr1, n, arr2, m, arr3);
+  // printArray(arr3, n + m);
   // int k;
   // cout << "Enter kth smallest element index :" << endl;
   // cin >> k;
