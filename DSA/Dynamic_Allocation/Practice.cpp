@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cstring>
 using namespace std;
 
 int sum(int *ar, int n)
@@ -12,8 +13,79 @@ int sum(int *ar, int n)
   return sum;
 }
 
+void func(char *str)
+{
+  // write your code here
+  int i = 0;
+  int j = strlen(str) - 1;
+  while (i < j)
+  {
+    char temp = str[i];
+    str[i] = str[j];
+    str[j] = temp;
+    i++;
+    j--;
+  }
+}
+
+void print(int *p)
+{
+  cout << *p << endl;
+}
+
+void incrementPointer(int *p)
+{
+  *p = (*p) * -1;
+}
+
+int sum1(int *a, int n)
+{
+  cout << sizeof(a) << endl;
+  return 0;
+}
+
 int main()
 {
+  int numbers[5];
+  int *p;
+  p = numbers;
+  *p = 10;
+  p = &numbers[2];
+  *p = 20;
+  p--;
+  *p = 30;
+  p = numbers + 3;
+  *p = 40;
+  p = numbers;
+  *(p + 4) = 50;
+  for (int n = 0; n < 5; n++)
+  {
+    cout << numbers[n] << ",";
+  }
+  // int arr[] = {4, 5, 6, 7};
+  // int *p = (arr + 1);
+  // cout << *arr + 9;
+  // return 0;
+  // int p = 10;
+  // incrementPointer(&p);
+  // cout << p;
+  // // int a[10];
+  // cout << sizeof(a) << endl;
+  // int i = 10;
+  // incrementPointer(&i);
+  // cout << i;
+  // print(&i);
+  // char ch[1000];
+  // cin >> ch;
+  // func(ch);
+  // cout << ch << endl;
+  // char b[] = "abcd";
+  // char *pc = &b[0];
+  // cout << pc << endl;
+
+  // char c = 'a';
+  // char *pa = &c;
+  // cout << pa << endl;
   // int a[] = {1, 2, 3, 4};
   // int *p = a++;
   // cout << *p << endl;
