@@ -40,6 +40,17 @@ int findDuplicate(vector<int> &arr, int n)
 
 int main()
 {
+  int n;
+  cin >> n;
+  vector<int> arr(n);
+  for (int i = 0; i < n; i++)
+  {
+    cin >> arr[i];
+  }
+  for (int i = 0; i < n; i++)
+  {
+    cout << arr[i];
+  }
   // vector<vector<int>> arr(3, vector<int>(3));
   // for (int i = 0; i < 3; i++)
   // {
