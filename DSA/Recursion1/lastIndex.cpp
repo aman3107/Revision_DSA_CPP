@@ -21,6 +21,7 @@ int lastIndex(int input[], int size, int x)
   }
   else
   {
+    cout << size << " " << smallOutput << endl;
     return smallOutput + 1;
   }
 }
