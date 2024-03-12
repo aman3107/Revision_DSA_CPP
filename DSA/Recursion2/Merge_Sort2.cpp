@@ -55,6 +55,8 @@ void mergeSort(int *input, int size)
   mergeSort(arr1, n1);
   mergeSort(arr2, n2);
   merge(input, size, arr1, arr2, n1, n2);
+  delete[] arr1;
+  delete[] arr2;
 }
 
 int main()
