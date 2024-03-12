@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 
-void merge(int arr[], int size, int arr1[], int n1, int arr2[], int n2)
+void merge(int *input, int size, int *arr1, int *arr2, int n1, int n2)
 {
   int i = 0;
   int j = 0;
@@ -10,74 +10,68 @@ void merge(int arr[], int size, int arr1[], int n1, int arr2[], int n2)
   {
     if (arr1[i] < arr2[j])
     {
-      arr[k] = arr1[i];
+      input[k] = arr1[i];
       i++;
     }
     else
     {
-      arr[k] = arr2[j];
+      input[k] = arr2[j];
       j++;
     }
     k++;
   }
-
   while (i < n1)
   {
-    arr[k] = arr1[i];
+    input[k] = arr1[i];
     i++;
     k++;
   }
-
   while (j < n2)
   {
-    arr[k] = arr2[j];
+    input[k] = arr2[j];
     j++;
     k++;
   }
 }
 
-void mergeSort(int arr[], int size)
+void mergeSort(int *input, int size)
 {
   if (size == 1)
-  {
     return;
-  }
-
   int n1 = size / 2;
-  int n2 = size - n1;
-  int arr1[n1];
-  int arr2[n2];
-
+  int *arr1;
+  arr1 = new int[n1];
   for (int i = 0; i < n1; i++)
   {
-    arr1[i] = arr[i];
+    arr1[i] = input[i];
   }
-  for (int i = 0; i < n2; i++)
+  int n2 = size - n1;
+  int *arr2;
+  arr2 = new int[n2];
+  for (int j = 0; j < n2; j++)
   {
-    arr2[i] = arr[+i];
+    arr2[j] = input[n1 + j];
   }
-
-  mergeSort(arr, n1);
-  mergeSort(arr, n2);
-  merge(arr, size, arr1, n1, arr2, n2);
+  mergeSort(arr1, n1);
+  mergeSort(arr2, n2);
+  merge(input, size, arr1, arr2, n1, n2);
 }
 
 int main()
 {
-  int n;
-  cin >> n;
-  int *arr = new int[n];
-  for (int i = 0; i < n; i++)
+  int length;
+  cout << "Enter n : " << endl;
+  cin >> length;
+  int *input;
+  input = new int[length];
+  for (int i = 0; i < length; i++)
+    cin >> input[i];
+  mergeSort(input, length);
+  for (int i = 0; i < length; i++)
   {
-    cin >> arr[i];
-  }
-
-  mergeSort(arr, n);
-  for (int i = 0; i < n; i++)
-  {
-    cout << arr[i] << " ";
+    cout << input[i] << " ";
   }
   cout << endl;
 
-  delete[] arr;
+  delete[] input;
 }
