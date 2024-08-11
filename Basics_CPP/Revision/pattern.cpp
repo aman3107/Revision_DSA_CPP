@@ -3,5 +3,19 @@ using namespace std;
 
 int main()
 {
-  cout << "Hello World" << endl;
+  int n;
+  cout << "Enter number of rows and columns" << endl;
+  cin >> n;
+  int i = 0;
+  while (i < n)
+  {
+    int j = 0;
+    while (j < n)
+    {
+      cout << "* ";
+      j++;
+    }
+    cout << endl;
+    i++;
+  }
 }
