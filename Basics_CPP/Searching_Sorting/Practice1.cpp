@@ -125,18 +125,208 @@ void bubbleSort(int arr[], int n)
   }
 }
 
+void bubbleSort1(int arr[], int n)
+{
+  for (int i = 0; i < n - 1; i++)
+  {
+    for (int j = 0; j < n - i - 1; j++)
+    {
+      if (arr[j] > arr[j + 1])
+      {
+        int temp = arr[j];
+        arr[j] = arr[j + 1];
+        arr[j + 1] = temp;
+      }
+    }
+  }
+}
+
+int getkthSmallest(int arr[], int n, int k)
+{
+  for (int i = 0; i < n - 1; i++)
+  {
+    for (int j = 0; j < n - i - 1; j++)
+    {
+      if (arr[j] > arr[j + 1])
+      {
+        int temp = arr[j];
+        arr[j] = arr[j + 1];
+        arr[j + 1] = temp;
+      }
+    }
+  }
+  return arr[k - 1];
+}
+
+void insertionSort(int arr[], int n)
+{
+  for (int i = 1; i < n; i++)
+  {
+    int pickUpCard = arr[i];
+    int j = i - 1;
+    while (j >= 0)
+    {
+      if (arr[j] > pickUpCard)
+      {
+        arr[j + 1] = arr[j];
+        j--;
+      }
+      else if (pickUpCard > arr[j])
+      {
+        break;
+      }
+      arr[j + 1] = pickUpCard;
+    }
+  }
+}
+
+void merge2SortedArrays(int arr1[], int n, int arr2[], int m, int arr3[])
+{
+  int i = 0;
+  int j = 0;
+  int c = 0;
+  while (i < n && j < m)
+  {
+    if (arr1[i] <= arr2[j])
+    {
+      arr3[c] = arr1[i];
+      i++;
+      c++;
+    }
+    else if (arr2[j] <= arr1[i])
+    {
+      arr3[c] = arr2[j];
+      j++;
+      c++;
+    }
+  }
+  while (i < n)
+  {
+    arr3[c] = arr1[i];
+    i++;
+    c++;
+  }
+  while (j < m)
+  {
+    arr3[c] = arr2[j];
+    j++;
+    c++;
+  }
+}
+
+int squareRoot(int n)
+{
+  int squareNumber = 0;
+  while (squareNumber * squareNumber <= n)
+  {
+    squareNumber++;
+  }
+  return squareNumber - 1;
+}
+
+void Sort_0_1_2(int arr[], int n)
+{
+  int i = 0;
+  int j = 0;
+  int k = n - 1;
+  while (j <= k)
+  {
+    if (arr[j] == 0)
+    {
+      int temp = arr[i];
+      arr[i] = arr[j];
+      arr[j] = temp;
+      i++;
+      j++;
+    }
+    else if (arr[j] == 2)
+    {
+      int temp = arr[k];
+      arr[k] = arr[j];
+      arr[j] = temp;
+      k--;
+    }
+    else
+    {
+      j++;
+    }
+  }
+}
+
+int findSecondLargets(int arr[], int n)
+{
+  int max = INT_MIN;
+  int sec_max = INT_MIN;
+  for (int i = 0; i < n; i++)
+  {
+    if (arr[i] > max)
+    {
+      sec_max = max;
+      max = arr[i];
+    }
+    else if (arr[i] > sec_max && max > sec_max)
+    {
+      sec_max = arr[i];
+    }
+  }
+  return sec_max;
+}
+
+int missingNumber(int arr[], int n)
+{
+  int sum = 0;
+  for (int i = 1; i <= n; i++)
+  {
+    sum = sum + i;
+  }
+  for (int i = 0; i < n; i++)
+  {
+    sum = sum - arr[i];
+  }
+  return sum;
+}
+
 int main()
 {
   int n;
-  cout << "Enter value of n :" << endl;
+  cout << "Enter value of n : " << endl;
   cin >> n;
   int arr[n];
   for (int i = 0; i < n; i++)
   {
     cin >> arr[i];
   }
-  bubbleSort(arr, n);
-  printArray(arr, n);
+  cout << missingNumber(arr, n);
+  // cout << findSecondLargets(arr, n);
+  // Sort_0_1_2(arr, n);
+  // printArray(arr, n);
+  // cout << squareRoot(n) << endl;
+  // int n, m;
+  // cout << "Enter value of n and m :" << endl;
+  // cin >> n >> m;
+  // int arr1[n];
+  // int arr2[m];
+  // cout << "Enter elements in 1st array :" << endl;
+  // for (int i = 0; i < n; i++)
+  // {
+  //   cin >> arr1[i];
+  // }
+  // cout << "Enter elements in 2nd array : " << endl;
+  // for (int i = 0; i < m; i++)
+  // {
+  //   cin >> arr2[i];
+  // }
+  // int arr3[n + m];
+  // insertionSort(arr, n);
+  // merge2SortedArrays(arr1, n, arr2, m, arr3);
+  // printArray(arr3, n + m);
+  // int k;
+  // cout << "Enter kth smallest element index :" << endl;
+  // cin >> k;
+  // cout << getkthSmallest(arr, n, k) << endl;
+  // bubbleSort(arr, n);
+  // bubbleSort1(arr, n);
+  // printArray(arr, n);
   // int searchEle;
   // cout << "Enter search element :" << endl;
   // cin >> searchEle;
