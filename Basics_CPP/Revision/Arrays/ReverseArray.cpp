@@ -1,18 +1,19 @@
 #include <iostream>
 using namespace std;
 
-int linearSearch(int arr[], int n, int m)
+void reverseArray(int arr[], int n)
 {
-  for (int i = 0; i < n; i++)
+  int i = 0;
+  int j = n - 1;
+  while (i < j)
   {
-    if (arr[i] == m)
-    {
-      return i;
-    }
+    int temp = arr[i];
+    arr[i] = arr[j];
+    arr[j] = temp;
+    i++;
+    j--;
   }
-  return -1;
 }
-
 int main()
 {
   int n;
@@ -26,9 +27,10 @@ int main()
     cin >> arr[i];
   }
 
-  int m;
-  cout << "Enter search element :" << endl;
-  cin >> m;
+  reverseArray(arr, n);
 
-  cout << linearSearch(arr, n, m) << endl;
+  for (int i = 0; i < n; i++)
+  {
+    cout << arr[i] << " ";
+  }
 }

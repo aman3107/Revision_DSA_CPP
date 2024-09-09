@@ -1,16 +1,17 @@
 #include <iostream>
 using namespace std;
 
-int linearSearch(int arr[], int n, int m)
+void corrspPairSum(int arr[], int n)
 {
-  for (int i = 0; i < n; i++)
+  int i = 0;
+  int j = n - 1;
+  while (i < j)
   {
-    if (arr[i] == m)
-    {
-      return i;
-    }
+    int sum = arr[i] + arr[j];
+    arr[i] = sum;
+    i++;
+    j--;
   }
-  return -1;
 }
 
 int main()
@@ -26,9 +27,10 @@ int main()
     cin >> arr[i];
   }
 
-  int m;
-  cout << "Enter search element :" << endl;
-  cin >> m;
+  corrspPairSum(arr, n);
 
-  cout << linearSearch(arr, n, m) << endl;
+  for (int i = 0; i < n / 2; i++)
+  {
+    cout << arr[i] << " ";
+  }
 }

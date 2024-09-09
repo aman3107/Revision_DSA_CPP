@@ -1,16 +1,14 @@
 #include <iostream>
 using namespace std;
 
-int linearSearch(int arr[], int n, int m)
+void swapAlternate(int arr[], int n)
 {
-  for (int i = 0; i < n; i++)
+  for (int i = 0, j = 1; j < n; i = i + 2, j = j + 2)
   {
-    if (arr[i] == m)
-    {
-      return i;
-    }
+    int temp = arr[i];
+    arr[i] = arr[j];
+    arr[j] = temp;
   }
-  return -1;
 }
 
 int main()
@@ -26,9 +24,10 @@ int main()
     cin >> arr[i];
   }
 
-  int m;
-  cout << "Enter search element :" << endl;
-  cin >> m;
+  swapAlternate(arr, n);
 
-  cout << linearSearch(arr, n, m) << endl;
+  for (int i = 0; i < n; i++)
+  {
+    cout << arr[i] << " ";
+  }
 }
