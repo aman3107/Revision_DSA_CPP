@@ -22,7 +22,7 @@ int main()
   cout << sizeof(a) << endl;
 
   p = p + 1;
-  a = a + 1;
+  // a = a + 1;
   cout << a << endl;
   cout << p << endl;
 }
