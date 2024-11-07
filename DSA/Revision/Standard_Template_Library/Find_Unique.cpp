@@ -3,6 +3,16 @@
 #include <algorithm>
 using namespace std;
 
+int findUnique2(vector<int> v, int n)
+{
+  int ans = 0;
+  for (int i = 0; i < n; i++)
+  {
+    ans = ans ^ v[i];
+  }
+  return ans;
+}
+
 int findUnique1(vector<int> v, int n)
 {
   sort(v.begin(), v.end());
@@ -32,4 +42,7 @@ int main()
 
   int ans1 = findUnique1(v, n);
   cout << ans1 << endl;
+
+  int ans2 = findUnique2(v, size);
+  cout << ans2 << endl;
 }
