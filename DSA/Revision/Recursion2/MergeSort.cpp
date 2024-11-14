@@ -40,7 +40,7 @@ void merge(int arr[], int low, int mid, int high)
     k++;
   }
 
-  while (j < n1)
+  while (j < n2)
   {
     arr[k] = arr2[j];
     j++;
