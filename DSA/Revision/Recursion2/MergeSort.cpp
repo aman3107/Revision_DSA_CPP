@@ -13,7 +13,7 @@ void merge(int arr[], int low, int mid, int high)
   }
   for (int i = 0; i < n2; i++)
   {
-    arr2[i] = arr[mid + i + 1];
+    arr2[i] = arr[mid + 1 + i];
   }
   int i = 0;
   int j = 0;
@@ -40,7 +40,7 @@ void merge(int arr[], int low, int mid, int high)
     k++;
   }
 
-  while (j < n2)
+  while (j < n1)
   {
     arr[k] = arr2[j];
     j++;
@@ -54,12 +54,12 @@ void mergeSort(int arr[], int l, int r)
   {
     return;
   }
-
   int mid = (l + r) / 2;
   mergeSort(arr, l, mid);
   mergeSort(arr, mid + 1, r);
   merge(arr, l, mid, r);
 }
+
 int main()
 {
   int n;

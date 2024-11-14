@@ -1,0 +1,56 @@
+// void merge(int arr[], int si, int mid, int ei)
+// {
+//   int n1 = mid - si + 1;
+//   int n2 = ei - mid;
+//   int arr1[n1];
+//   int arr2[n2];
+//   for (int i = 0; i < n1; i++)
+//   {
+//     arr1[i] = arr[si + i];
+//   }
+//   for (int j = 0; j < n2; j++)
+//   {
+//     arr2[j] = arr[mid + 1 + j];
+//   }
+//   int i = 0;
+//   int j = 0;
+//   int c = si;
+//   while (i < n1 && j < n2)
+//   {
+//     if (arr1[i] < arr2[j])
+//     {
+//       arr[c] = arr1[i];
+//       i++;
+//     }
+//     else if (arr1[i] > arr2[j])
+//     {
+//       arr[c] = arr2[j];
+//       j++;
+//     }
+//     c++;
+//   }
+//   while (i < n1)
+//   {
+//     arr[c] = arr1[i];
+//     i++;
+//     c++;
+//   }
+//   while (j < n1)
+//   {
+//     arr[c] = arr2[j];
+//     j++;
+//     c++;
+//   }
+// }
+
+// void mergeSort(int arr[], int si, int ei)
+// {
+//   if (si >= ei)
+//   {
+//     return;
+//   }
+//   int mid = (si + ei) / 2;
+//   mergeSort(arr, si, mid);
+//   mergeSort(arr, mid + 1, ei);
+//   merge(arr, si, mid, ei);
+// }
