@@ -44,5 +44,5 @@ int main()
   s3->display();
   s2.display();
   delete s3;
-  Student s4 = s1; // Student s4(s1); Cop Constructor Called
+  Student s4 = s1; // Student s4(s1); Copy Constructor Called
 }
