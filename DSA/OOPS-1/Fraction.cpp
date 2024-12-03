@@ -34,7 +34,7 @@ public:
     denominator = denominator / gcd;
   }
 
-  void add(Fraction f1)
+  void add(Fraction const &f1)
   {
     int lcm = this->denominator * f1.denominator;
     int x = lcm / this->denominator;
@@ -43,6 +43,13 @@ public:
     this->numerator = num;
     this->denominator = lcm;
 
+    this->simplify();
+  }
+
+  void multiply(Fraction const &f1)
+  {
+    this->numerator = this->numerator * f1.numerator;
+    this->denominator = this->denominator * f1.denominator;
     this->simplify();
   }
 };
