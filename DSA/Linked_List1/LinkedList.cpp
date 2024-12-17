@@ -2,6 +2,105 @@
 #include "Node.cpp"
 using namespace std;
 
+int lengthRecursive(Node *head)
+{
+  Node *temp = head;
+  if (temp == NULL)
+  {
+    return 0;
+  }
+  int smallerOutput = lengthRecursive(temp->next);
+  return smallerOutput + 1;
+}
+
+Node *deleteNode(Node *head, int ind)
+{
+  if (head == NULL)
+  {
+    return head;
+  }
+  if (ind == 0)
+  {
+    Node *a = head;
+    head = a->next;
+    delete a;
+    return head;
+  }
+  int count = 0;
+  Node *temp = head;
+  while (temp != NULL && count < ind - 1)
+  {
+    temp = temp->next;
+    count++;
+  }
+  if (temp == NULL || temp->next == NULL)
+  {
+    return head;
+  }
+  else
+  {
+    Node *a = temp->next;
+    temp->next = a->next;
+    delete a;
+  }
+  return head;
+}
+
+Node *insertNode(Node *head, int ind, int data)
+{
+  Node *newNode = new Node(data);
+  Node *temp = head;
+  if (ind == 0)
+  {
+    newNode->next = head;
+    head = newNode;
+    return head;
+  }
+  int count = 0;
+  while (temp != NULL && count < ind - 1)
+  {
+    temp = temp->next;
+    count++;
+  }
+  if (temp != NULL)
+  {
+    newNode->next = temp->next;
+    temp->next = newNode;
+  }
+  return head;
+}
+
+void printIthNode(Node *head, int i)
+{
+  int count = 0;
+  Node *temp = head;
+  while (temp != NULL)
+  {
+    if (count == i)
+    {
+      cout << temp->data;
+    }
+    else if (count > i)
+    {
+      break;
+    }
+    count++;
+    temp = temp->next;
+  }
+}
+
+int length(Node *head)
+{
+  int count = 0;
+  Node *temp = head;
+  while (temp != NULL)
+  {
+    count++;
+    temp = temp->next;
+  }
+  return count;
+}
+
 Node *takeInput()
 {
   int data;
@@ -39,7 +138,16 @@ void print(Node *head)
 int main()
 {
   Node *head = takeInput();
-  print(head);
+  cout << lengthRecursive(head) << endl;
+  // print(head);
+  // cout << length(head) << endl;
+  // printIthNode(head, 4);
+  // cout << head->next->next->data;
+  // int index, data;
+  // cin >> index >> data;
+  // head = insertNode(head, index, data);
+  // head = deleteNode(head, index);
+  // print(head);
 
   // Statically
   /*
