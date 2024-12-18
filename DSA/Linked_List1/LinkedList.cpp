@@ -2,6 +2,47 @@
 #include "Node.cpp"
 using namespace std;
 
+Node *deleteNodeRecursive(Node *head, int index)
+{
+  if (head == NULL)
+  {
+    return NULL;
+  }
+  if (index == 0)
+  {
+    Node *a = head->next;
+    delete head;
+    return a;
+  }
+  Node *smallOutput = deleteNodeRecursive(head->next, index - 1);
+  head->next = smallOutput;
+  return head;
+}
+
+Node *insertNodeRecursive(Node *head, int index, int data)
+{
+  if (head == NULL)
+  {
+    return head;
+  }
+  if (index == 0)
+  {
+    Node *newNode = new Node(data);
+    newNode->next = head;
+    head = newNode;
+    return head;
+  }
+  Node *x = insertNodeRecursive(head->next, index - 1, data);
+  if (x == NULL && index == 1)
+  {
+    Node *newNode = new Node(data);
+    head->next = newNode;
+    return head;
+  }
+  head->next = x;
+  return head;
+}
+
 int lengthRecursive(Node *head)
 {
   Node *temp = head;
@@ -138,16 +179,18 @@ void print(Node *head)
 int main()
 {
   Node *head = takeInput();
-  cout << lengthRecursive(head) << endl;
+  // cout << lengthRecursive(head) << endl;
   // print(head);
   // cout << length(head) << endl;
   // printIthNode(head, 4);
   // cout << head->next->next->data;
-  // int index, data;
-  // cin >> index >> data;
+  int index, data;
+  cin >> index >> data;
   // head = insertNode(head, index, data);
   // head = deleteNode(head, index);
-  // print(head);
+  // head = insertNodeRecursive(head, index, data);
+  head = deleteNodeRecursive(head, index);
+  print(head);
 
   // Statically
   /*
