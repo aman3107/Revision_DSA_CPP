@@ -1,6 +1,34 @@
 #include <iostream>
 #include "Node.cpp"
 using namespace std;
+
+Node *removeDuplicates(Node *head)
+{
+  // Write your code here
+  if (head == NULL)
+  {
+    return head;
+  }
+  Node *temp1 = head;
+  Node *temp2 = head->next;
+  while (temp1->next != NULL)
+  {
+    if (temp1->data == temp2->data)
+    {
+      Node *x = temp2;
+      temp1->next = x->next;
+      temp2 = x->next;
+      delete x;
+    }
+    else
+    {
+      temp1 = temp1->next;
+      temp2 = temp2->next;
+    }
+  }
+  return head;
+}
+
 int length(Node *head)
 {
   int count = 0;
@@ -120,9 +148,10 @@ Node *takeInput()
 int main()
 {
   Node *head = takeInput();
-  int n;
-  cin >> n;
-  head = appendLastNToFirst(head, n);
+  // int n;
+  // cin >> n;
+  // head = appendLastNToFirst(head, n);
+  head = removeDuplicates(head);
   print(head);
   // printReverse(head);
   // int data;
