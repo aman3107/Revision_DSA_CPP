@@ -2,6 +2,69 @@
 #include "Node.cpp"
 using namespace std;
 
+Node *reverseLL(Node *head)
+{
+  if (head == NULL || head->next == NULL)
+  {
+    return head;
+  }
+  Node *current = head;
+  Node *prev = NULL;
+  Node *next = head->next;
+  while (current != NULL)
+  {
+    current->next = prev;
+    prev = current;
+    current = next;
+    if (next != NULL)
+    {
+      next = next->next;
+    }
+  }
+  return prev;
+}
+
+Node *midNode(Node *head)
+{
+  if (head == NULL || head->next == NULL)
+  {
+    return head;
+  }
+  Node *slow = head;
+  Node *fast = head->next;
+  while (fast != NULL && fast->next != NULL)
+  {
+    slow = slow->next;
+    fast = fast->next->next;
+  }
+  return slow;
+}
+
+bool isPalindrome(Node *head)
+{
+  // Write your code here
+  if (head == NULL || head->next == NULL)
+  {
+    return true;
+  }
+  Node *midHead = midNode(head);
+  Node *head1 = reverseLL(midHead->next);
+  Node *head2 = head;
+  while (head1 != NULL)
+  {
+    if (head1->data != head2->data)
+    {
+      return false;
+    }
+    else
+    {
+      head1 = head1->next;
+      head2 = head2->next;
+    }
+  }
+  return true;
+}
+
 Node *removeDuplicates(Node *head)
 {
   // Write your code here
@@ -151,8 +214,10 @@ int main()
   // int n;
   // cin >> n;
   // head = appendLastNToFirst(head, n);
-  head = removeDuplicates(head);
-  print(head);
+  // head = removeDuplicates(head);
+  bool ans = isPalindrome(head);
+  cout << ans << endl;
+  // print(head);
   // printReverse(head);
   // int data;
   // cin >> data;
