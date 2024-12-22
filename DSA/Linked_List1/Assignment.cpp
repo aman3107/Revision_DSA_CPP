@@ -211,12 +211,14 @@ Node *takeInput()
 int main()
 {
   Node *head = takeInput();
-  // int n;
-  // cin >> n;
+  int n;
+  cin >> n;
+  // head = rotate(head, n);
+  print(head);
   // head = appendLastNToFirst(head, n);
   // head = removeDuplicates(head);
-  bool ans = isPalindrome(head);
-  cout << ans << endl;
+  // bool ans = isPalindrome(head);
+  // cout << ans << endl;
   // print(head);
   // printReverse(head);
   // int data;
