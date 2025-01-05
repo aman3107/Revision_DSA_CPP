@@ -4,6 +4,61 @@
 #include "TreeNodeClass.h"
 using namespace std;
 
+int getLeafNodeCount(TreeNode<int> *root)
+{
+  // Write your code here
+  if (root == NULL)
+  {
+    return 0;
+  }
+  if (root->children.size() == 0)
+  {
+    return 1;
+  }
+  int ans = 0;
+  for (int i = 0; i < root->children.size(); i++)
+  {
+    ans = ans + getLeafNodeCount(root->children[i]);
+  }
+  return ans;
+}
+
+void printAtLevelK(TreeNode<int> *root, int k)
+{
+  if (root == NULL)
+  {
+    return;
+  }
+  if (k == 0)
+  {
+    cout << root->data << endl;
+    return;
+  }
+  for (int i = 0; i < root->children.size(); i++)
+  {
+    printAtLevelK(root->children[i], k - 1);
+  }
+}
+
+int getHeight(TreeNode<int> *root)
+{
+  // Write your code here
+  if (root == NULL)
+  {
+    return 0;
+  }
+  int max = 0;
+  for (int i = 0; i < root->children.size(); i++)
+  {
+    int childHeight = getHeight(root->children[i]);
+    if (childHeight > max)
+    {
+      max = childHeight;
+    }
+  }
+  return max + 1;
+}
+
 TreeNode<int> *maxDataNodeBetter(TreeNode<int> *root)
 {
   // Write your code here
@@ -152,6 +207,41 @@ void print(TreeNode<int> *root)
   }
 }
 
+void postOrder(TreeNode<int> *root)
+{
+  if (root == NULL)
+  {
+    return;
+  }
+  for (int i = 0; i < root->children.size(); i++)
+  {
+    postOrder(root->children[i]);
+  }
+  cout << root->data << " ";
+}
+
+void preOrder(TreeNode<int> *root)
+{
+  if (root == NULL)
+  {
+    return;
+  }
+  cout << root->data << " ";
+  for (int i = 0; i < root->children.size(); i++)
+  {
+    preOrder(root->children[i]);
+  }
+}
+
+void deleteTree(TreeNode<int> *root)
+{
+  for (int i = 0; i < root->children.size(); i++)
+  {
+    deleteTree(root->children[i]);
+  }
+  delete root;
+}
+// 10 3 20 30 40 2 50 60 2 70 80 0 0 0 0 0
 int main()
 {
   /*
@@ -165,9 +255,16 @@ int main()
   // print(root);
 
   TreeNode<int> *root = takeInputLevelWise();
-  printLevelWise(root);
-  cout << countNodes(root) << endl;
-  cout << sumOfNodes(root) << endl;
-  TreeNode<int> *ans = maxDataNodeBetter(root);
-  cout << ans->data << endl;
+  preOrder(root);
+  postOrder(root);
+  // cout << getLeafNodeCount(root) << endl;
+  // printAtLevelK(root, 1);
+  // printLevelWise(root);
+  // cout << getHeight(root) << endl;
+  // cout << countNodes(root) << endl;
+  // cout << sumOfNodes(root) << endl;
+  // TreeNode<int> *ans = maxDataNodeBetter(root);
+  // cout << ans->data << endl;
+  // deleteTree(root);
+  delete root;
 }
