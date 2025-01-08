@@ -5,6 +5,94 @@
 #include <vector>
 using namespace std;
 
+int diameter(BinaryTreeNode<int> *root)
+{
+  if (root == NULL)
+  {
+    return 0;
+  }
+  int option1 = height(root->left) + height(root->right);
+  int option2 = diameter(root->left);
+  int option3 = diameter(root->right);
+  return max(option1, (max(option2, option3)));
+}
+
+BinaryTreeNode<int> *buildTreeHelper1(int *postorder, int *inorder, int inS, int inE, int postS, int postE)
+{
+  // Write your code here
+  if (inS > inE)
+  {
+    return NULL;
+  }
+  int rootData = postorder[postE];
+  int rootIndex = -1;
+  for (int i = inS; i <= inE; i++)
+  {
+    if (rootData == inorder[i])
+    {
+      rootIndex = i;
+      break;
+    }
+  }
+  int lpostS = postS;
+  int linS = inS;
+  int linE = rootIndex - 1;
+  int lpostE = linE - linS + lpostS;
+  int rpostS = lpostE + 1;
+  int rpostE = postE - 1;
+  int rinS = rootIndex + 1;
+  int rinE = inE;
+  BinaryTreeNode<int> *root = new BinaryTreeNode<int>(rootData);
+  root->left = buildTreeHelper1(postorder, inorder, linS, linE, lpostS, lpostE);
+  root->right = buildTreeHelper1(postorder, inorder, rinS, rinE, rpostS, rpostE);
+  return root;
+}
+
+BinaryTreeNode<int> *buildTree1(int *postorder, int postLength, int *inorder, int inLength)
+{
+  // Write your code here
+  return buildTreeHelper1(postorder, inorder, 0, inLength - 1, 0, postLength - 1);
+}
+
+BinaryTreeNode<int> *buildTreeHelper(int *preorder, int *inorder, int inS, int inE, int preS, int preE)
+{
+  // Write your code here
+  if (preS > preE)
+  {
+    return NULL;
+  }
+  int rootData = preorder[preS];
+  BinaryTreeNode<int> *root = new BinaryTreeNode<int>(rootData);
+  int linS = inS;
+  int lpreS = preS + 1;
+  int inRootIndex = -1;
+  for (int i = inS; i <= inE; i++)
+  {
+    if (rootData == inorder[i])
+    {
+      inRootIndex = i;
+      break;
+    }
+  }
+  int linE = inRootIndex - 1;
+  int lpreE = linE - linS + lpreS;
+  root->left = buildTreeHelper(preorder, inorder, linS, linE, lpreS, lpreE);
+  int rinS = inRootIndex + 1;
+  int rpreS = lpreE + 1;
+  int rinE = inE;
+  int rpreE = preE;
+  // BinaryTreeNode<int> *root = new BinaryTreeNode<int>(rootData);
+  // root->left = buildTreeHelper(preorder, inorder, linS, linE, lpreS, lpreE);
+  root->right = buildTreeHelper(preorder, inorder, rinS, rinE, rpreS, rpreE);
+  return root;
+}
+
+BinaryTreeNode<int> *buildTree(int *preorder, int preLength, int *inorder, int inLength)
+{
+  // Write your code here
+  return buildTreeHelper(preorder, inorder, 0, inLength - 1, 0, preLength - 1);
+}
+
 void postOrder(BinaryTreeNode<int> *root)
 {
   // Write your code here
@@ -228,6 +316,20 @@ BinaryTreeNode<int> *takeInput()
 
 int main()
 {
+  int size;
+  cout << "Enter size of array :" << endl;
+  cin >> size;
+  int *pre = new int[size];
+  int *in = new int[size];
+
+  for (int i = 0; i < size; i++)
+    cin >> pre[i];
+  for (int i = 0; i < size; i++)
+    cin >> in[i];
+  // BinaryTreeNode<int> *root = buildTree(pre, size, in, size);
+  BinaryTreeNode<int> *root = buildTree1(pre, size, in, size);
+
+  printTreeLevelWise(root);
   /*
   BinaryTreeNode<int> *root = new BinaryTreeNode<int>(1);
   BinaryTreeNode<int> *node1 = new BinaryTreeNode<int>(2);
@@ -237,20 +339,22 @@ int main()
   printTree(root);
   delete root;
   */
-  BinaryTreeNode<int> *root = takeInputLevelWise();
-  postOrder(root);
-  cout << endl;
-  vector<int> v = preOrder(root);
-  for (int i = 0; i < v.size(); i++)
-  {
-    cout << v[i] << " ";
-  }
-  cout << endl;
-  inOrder(root);
+  // BinaryTreeNode<int> *root = takeInputLevelWise();
+  // postOrder(root);
+  // cout << endl;
+  // vector<int> v = preOrder(root);
+  // for (int i = 0; i < v.size(); i++)
+  // {
+  //   cout << v[i] << " ";
+  // }
+  // cout << endl;
+  // inOrder(root);
   // mirrorBinaryTree(root);
   // cout << height(root) << endl;
   // cout << isNodePresent(root, -1) << endl;
   // cout << countNode(root) << endl;
   // printTreeLevelWise(root);
+  delete[] pre;
+  delete[] in;
   delete root;
 }
