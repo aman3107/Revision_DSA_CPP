@@ -5,17 +5,49 @@
 #include <vector>
 using namespace std;
 
-int diameter(BinaryTreeNode<int> *root)
+template <typename T>
+class Pair
+{
+public:
+  T height;
+  T diameter;
+};
+
+Pair<int> diameterBetter(BinaryTreeNode<int> *root)
 {
   if (root == NULL)
   {
-    return 0;
+    Pair<int> p;
+    p.height = 0;
+    p.diameter = 0;
+    return p;
   }
-  int option1 = height(root->left) + height(root->right);
-  int option2 = diameter(root->left);
-  int option3 = diameter(root->right);
-  return max(option1, (max(option2, option3)));
+  Pair<int> leftAns = diameterBetter(root->left);
+  Pair<int> rightAns = diameterBetter(root->right);
+  int lh = leftAns.height;
+  int ld = leftAns.diameter;
+  int rh = rightAns.height;
+  int rd = rightAns.diameter;
+
+  int height = 1 + max(lh, rh);
+  int diameter = max(lh + rh, max(rd, ld));
+  Pair<int> ans;
+  ans.height = height;
+  ans.diameter = diameter;
+  return ans;
 }
+
+// int diameter(BinaryTreeNode<int> *root)
+// {
+//   if (root == NULL)
+//   {
+//     return 0;
+//   }
+//   int option1 = height(root->left) + height(root->right);
+//   int option2 = diameter(root->left);
+//   int option3 = diameter(root->right);
+//   return max(option1, (max(option2, option3)));
+// }
 
 BinaryTreeNode<int> *buildTreeHelper1(int *postorder, int *inorder, int inS, int inE, int postS, int postE)
 {
@@ -316,6 +348,7 @@ BinaryTreeNode<int> *takeInput()
 
 int main()
 {
+  /*
   int size;
   cout << "Enter size of array :" << endl;
   cin >> size;
@@ -328,8 +361,7 @@ int main()
     cin >> in[i];
   // BinaryTreeNode<int> *root = buildTree(pre, size, in, size);
   BinaryTreeNode<int> *root = buildTree1(pre, size, in, size);
-
-  printTreeLevelWise(root);
+  */
   /*
   BinaryTreeNode<int> *root = new BinaryTreeNode<int>(1);
   BinaryTreeNode<int> *node1 = new BinaryTreeNode<int>(2);
@@ -339,7 +371,10 @@ int main()
   printTree(root);
   delete root;
   */
-  // BinaryTreeNode<int> *root = takeInputLevelWise();
+  BinaryTreeNode<int> *root = takeInputLevelWise();
+  Pair<int> p = diameterBetter(root);
+  cout << p.height << endl;
+  cout << p.diameter << endl;
   // postOrder(root);
   // cout << endl;
   // vector<int> v = preOrder(root);
@@ -354,7 +389,7 @@ int main()
   // cout << isNodePresent(root, -1) << endl;
   // cout << countNode(root) << endl;
   // printTreeLevelWise(root);
-  delete[] pre;
-  delete[] in;
+  // delete[] pre;
+  // delete[] in;
   delete root;
 }
