@@ -20,6 +20,33 @@ public:
   }
 };
 
+vector<int> *getRootToNodePath(BinaryTreeNode<int> *root, int data)
+{
+  if (root == NULL)
+  {
+    return NULL;
+  }
+  if (root->data == data)
+  {
+    vector<int> *ans = new vector<int>();
+    ans->push_back(root->data);
+    return ans;
+  }
+  vector<int> *leftAns = getRootToNodePath(root->left, data);
+  if (leftAns != NULL)
+  {
+    leftAns->push_back(root->data);
+    return leftAns;
+  }
+  vector<int> *rightAns = getRootToNodePath(root->right, data);
+  if (rightAns != NULL)
+  {
+    rightAns->push_back(root->data);
+    return rightAns;
+  }
+  return NULL;
+}
+
 Node<int> *constructLinkedList(BinaryTreeNode<int> *root)
 {
   // Write your code here
@@ -281,13 +308,20 @@ BinaryTreeNode<int> *takeInput()
 int main()
 {
   BinaryTreeNode<int> *root = takeInput();
-  Node<int> *head = constructLinkedList(root);
-
-  while (head != NULL)
+  int data;
+  cin >> data;
+  vector<int> *v = getRootToNodePath(root, data);
+  for (int i = 0; i < v->size(); i++)
   {
-    cout << head->data << " ";
-    head = head->next;
+    cout << v->at(i) << endl;
   }
+  // Node<int> *head = constructLinkedList(root);
+
+  // while (head != NULL)
+  // {
+  //   cout << head->data << " ";
+  //   head = head->next;
+  // }
   /*
   int size;
   cin >> size;
@@ -313,4 +347,5 @@ int main()
   // printTreeLevelWise(root);
   // delete[] input;
   delete root;
+  delete v;
 }
