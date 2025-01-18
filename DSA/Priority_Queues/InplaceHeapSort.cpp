@@ -1,63 +1,6 @@
 #include <iostream>
 using namespace std;
 
-void insert(int arr[], int n)
-{
-  for (int i = 1; i < n; i++)
-  {
-    int childIndex = i;
-    while (childIndex > 0)
-    {
-      int parentIndex = (childIndex - 1) / 2;
-      if (arr[childIndex] < arr[parentIndex])
-      {
-        int temp = arr[childIndex];
-        arr[childIndex] = arr[parentIndex];
-        arr[parentIndex] = temp;
-      }
-      else
-      {
-        break;
-      }
-      childIndex = parentIndex;
-    }
-  }
-}
-
-void remove(int arr[], int n)
-{
-
-  int size = n;
-  int temp = arr[0];
-  arr[0] = arr[size - 1];
-  arr[size - 1] = temp;
-  size--;
-  int parentIndex = 0;
-  while (parentIndex < size - 1)
-  {
-    int leftChildIndex = (2 * parentIndex) + 1;
-    int rightChildIndex = (2 * parentIndex) + 2;
-    if ((leftChildIndex < size) && (arr[leftChildIndex] < arr[rightChildIndex]) && (arr[leftChildIndex] < arr[parentIndex]))
-    {
-      int temp = arr[parentIndex];
-      arr[parentIndex] = arr[leftChildIndex];
-      arr[leftChildIndex] = temp;
-      parentIndex = leftChildIndex;
-    }
-    else if ((rightChildIndex < size) && (arr[leftChildIndex] > arr[rightChildIndex]) && (arr[rightChildIndex] < arr[parentIndex]))
-    {
-      int temp = arr[parentIndex];
-      arr[parentIndex] = arr[rightChildIndex];
-      arr[rightChildIndex] = temp;
-      parentIndex = rightChildIndex;
-    }
-    else
-    {
-      break;
-    }
-  }
-}
-
 void heapSort(int arr[], int n)
 {
   // Write your code
